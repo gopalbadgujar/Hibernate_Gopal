@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extract method &apos;private static void getNewEmployee()&apos; from &apos;com.controller.Application.main(...)&apos; to &apos;com.controller.Application&apos;&#x0D;&#x0A;- Original project: &apos;B31HibernateHQL-Practice-NamedQueries&apos;&#x0D;&#x0A;- Method name: &apos;getNewEmployee&apos;&#x0D;&#x0A;- Destination type: &apos;com.controller.Application&apos;&#x0D;&#x0A;- Declared visibility: &apos;private&apos;" comments="false" description="Extract method &apos;getNewEmployee&apos;" destination="0" exceptions="false" flags="786434" id="org.eclipse.jdt.ui.extract.method" input="/src&lt;com.controller{Application.java" name="getNewEmployee" replace="false" selection="510 348" stamp="1695145661133" version="1.0" visibility="2"/>
+</session>

@@ -1,0 +1,5 @@
+1695061350464	Extract method 'getAllData'
+1695061903087	Extract method 'getDataByCondition'
+1695062597186	Extract method 'getNameOnly'
+1695063668101	Extract method 'updateData'
+1695108676749	Extract method 'deleteData'

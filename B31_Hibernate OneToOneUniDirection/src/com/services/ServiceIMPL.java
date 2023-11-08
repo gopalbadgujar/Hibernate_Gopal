@@ -1,0 +1,157 @@
+package com.services;
+
+import java.util.Scanner;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import com.hibernateUtil.HibernateUtil;
+import com.model.Car;
+import com.model.Engine;
+
+
+public class ServiceIMPL implements Services {
+
+	SessionFactory sf = HibernateUtil.getSessionFactory();
+	Scanner sc = new Scanner(System.in);
+
+	@Override
+	public void addCarWithEngine() {
+		Session session = sf.openSession();
+		System.out.println("\n ADD CAR WITH ENGINE");  
+		
+		Car c = new Car();
+		System.out.println("ENTER CAR NAME: ");
+		c.setCname(sc.next());
+
+		Engine e = new Engine();
+		System.out.println("Enter Engine Name: ");
+		e.setEname(sc.next());
+		
+		c.setEngine(e);
+
+		session.save(c);
+//		session.save(e);
+		session.beginTransaction().commit();
+
+	}
+
+	@Override
+	public void upadteCarDataWithCarID() {
+		Session session = sf.openSession();
+		System.out.println("\n UPDATE CAR DATA WITH CAR-ID");
+
+		System.out.println("Enter car Id : ");
+		Car c = session.get(Car.class, sc.nextInt());
+
+		if (c != null) {
+
+			System.out.println("Enter Updated Car Name, cname: ");
+			c.setCname(sc.next());
+
+			session.update(c);
+			session.beginTransaction().commit();
+		} else {
+			System.out.println("Car not found");
+		}
+	}
+
+	@Override
+	public void upadateEngineDataWithEID() {
+		Session session = sf.openSession();
+		System.out.println("\n UPDATE ENGINE DATA WITH EID");
+
+		System.out.println("Enter eid: ");
+		Engine e = session.get(Engine.class, sc.nextInt());
+
+		if (e != null) {
+			System.out.println("Enter Updataed Engine Name, ename: ");
+			e.setEname(sc.next());
+			session.update(e);
+			session.beginTransaction().commit();
+		} else {
+			System.out.println("Engine not found.");
+		}
+	}
+
+	@Override
+	public void updateEngineDataUSsingCId() {
+		Session session = sf.openSession();
+		System.out.println("UPDATE ENGINE DATA USING CID");
+		
+		System.out.println("Enter cid : ");
+		int cid = sc.nextInt();
+
+		Car c = session.get(Car.class, cid);
+
+		if (c != null) {
+
+			Engine e = c.getEngine();
+			System.out.println("Enter Updataed Engine Name, ename : ");
+			e.setEname(sc.next());
+
+//			session.update(c);
+			session.update(e);
+
+			session.beginTransaction().commit();
+
+		} else {
+			System.out.println("Car not found");
+		}
+	}
+
+	@Override
+	public void deleteOnlyCar() {
+
+		Session sesson = sf.openSession();   
+		System.out.println("\n DELETE ONLY CAR");
+//		System.out.println("Enter cid: ");;
+//		Car c= sesson.get(Car.class, sc.nextInt());
+//		if(c != null) {
+//			Engine e = c.getEngine();
+//			
+		}
+		
+//	}
+
+	@Override
+	public void deleteOnlyEngine() {
+		Session session = sf.openSession();
+		System.out.println("\n DETE ONLY ENGINE");
+
+		System.out.println("Enter cid : ");
+		Car c = session.get(Car.class, sc.nextInt());
+
+		if (c != null) {
+			Engine e = c.getEngine();
+//			Engine e1 = null;
+			c.setEngine(null);
+
+			session.update(c);
+			session.delete(e);
+			session.beginTransaction().commit();
+
+		} else {
+			System.out.println("Car not found");
+		}
+	}
+
+	@Override
+	public void deleteCarAndEngine() {
+		Session session = sf.openSession();  
+		System.out.println("\n DELETE CAR AND ENGINE");
+
+		System.out.println("Enter Car id : ");
+		Car c = session.get(Car.class, sc.nextInt());
+		if (c != null) {
+
+			session.delete(c);
+			session.beginTransaction().commit();
+
+		} else {
+			System.out.println("Car not found");
+		}
+
+	}
+
+}
